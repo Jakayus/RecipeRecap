@@ -1,0 +1,23 @@
+Coding Challenge Planning and Notes
+
+Focus on the Must Haves, then selectivly go through Nice to Haves.
+
+Must Haves:
+- API interaction
+-- Fetch by Meal Category (Desserts)
+-- Fetch by Meal ID
+- minimalistic but functional UI/UX
+
+Nice to Haves:
+- Error Handling
+- Documentation Hosting
+- Unit Testing
+- Persistency
+
+
+Notes:
+CoreData vs User Defaults?
+Sort using NSDescriptor vs filter and other functions?
+
+
+
