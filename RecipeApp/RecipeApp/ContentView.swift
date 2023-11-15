@@ -12,17 +12,47 @@ struct ContentView: View {
     
     @State var mainURL = ""
     
+    let sampleList = ["meal1", "meal2", "meal3"]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-        .onAppear{
-            getMealData()
-        }
+        NavigationView {
+            VStack {
+                
+                // Header
+                HStack{
+                    Text("Header goes here")
+                }
+                
+                // Hero Section
+                VStack{
+                    Image(systemName: "globe")
+                        .imageScale(.large)
+                        .foregroundStyle(.tint)
+                    Text("Hero Section!")
+                }
+                
+                // Meal Items
+                List {
+                    // TODO: Apply a ForEach here for the meal list
+                    
+                    ForEach(sampleList, id: \.self) { meal in
+                        NavigationLink  {
+                            Text("\(meal) Details View")
+                        } label: {
+                            Text("\(meal) Item View")
+                        }
+                    }
+                    
+                }
+                
+                
+                
+            }
+            .padding()
+            .onAppear{
+               // getMealData() DEBUG purposes only
+            }
+        } // end Navigation View
     }
     
     
@@ -39,7 +69,7 @@ struct ContentView: View {
         } catch {
             print("Error decoding meal by ID")
         }
-
+        
         
     }
     
@@ -63,7 +93,7 @@ struct ContentView: View {
         
     }
     
- 
+    
     
 }
 

@@ -10,5 +10,9 @@ import Foundation
 struct MealList: Decodable {
     
     let meals: [Meal]
+    
+    init(meals: [Meal]) {
+        self.meals = meals
+    }
 }
 
