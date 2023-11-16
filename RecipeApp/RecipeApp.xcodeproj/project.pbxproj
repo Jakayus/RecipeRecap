@@ -13,7 +13,7 @@
 		DC0E5BBF2B048908002AE46D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC0E5BBE2B048908002AE46D /* Preview Assets.xcassets */; };
 		DC0E5BC62B05112E002AE46D /* MealList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E5BC52B05112E002AE46D /* MealList.swift */; };
 		DC0E5BC82B051151002AE46D /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E5BC72B051151002AE46D /* Meal.swift */; };
-		DC0E5BCC2B059C76002AE46D /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E5BCB2B059C76002AE46D /* NetworkingManager.swift */; };
+		DC0E5BCC2B059C76002AE46D /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0E5BCB2B059C76002AE46D /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +24,7 @@
 		DC0E5BBE2B048908002AE46D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DC0E5BC52B05112E002AE46D /* MealList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealList.swift; sourceTree = "<group>"; };
 		DC0E5BC72B051151002AE46D /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
-		DC0E5BCB2B059C76002AE46D /* NetworkingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
+		DC0E5BCB2B059C76002AE46D /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +59,7 @@
 			children = (
 				DC0E5BB72B048907002AE46D /* RecipeAppApp.swift */,
 				DC0E5BB92B048907002AE46D /* ContentView.swift */,
-				DC0E5BCB2B059C76002AE46D /* NetworkingManager.swift */,
+				DC0E5BCB2B059C76002AE46D /* DataManager.swift */,
 				DC0E5BBB2B048908002AE46D /* Assets.xcassets */,
 				DC0E5BBD2B048908002AE46D /* Preview Content */,
 				DC0E5BC52B05112E002AE46D /* MealList.swift */,
@@ -149,7 +149,7 @@
 				DC0E5BC82B051151002AE46D /* Meal.swift in Sources */,
 				DC0E5BC62B05112E002AE46D /* MealList.swift in Sources */,
 				DC0E5BBA2B048907002AE46D /* ContentView.swift in Sources */,
-				DC0E5BCC2B059C76002AE46D /* NetworkingManager.swift in Sources */,
+				DC0E5BCC2B059C76002AE46D /* DataManager.swift in Sources */,
 				DC0E5BB82B048907002AE46D /* RecipeAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

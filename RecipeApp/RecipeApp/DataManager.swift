@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 
-class NetworkingManager: ObservableObject {
+class DataManager: ObservableObject {
     
     @Published var mainURL = ""
     @Published var allMeals = MealList(meals: [Meal]())
