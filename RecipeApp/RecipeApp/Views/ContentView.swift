@@ -12,6 +12,7 @@ struct Header: View {
     var body: some View {
         
         Text("Recipe Recap")
+            .font(.custom("Zapfino", size: 25.0))
             .italic()
             .bold()
             .font(.largeTitle)
@@ -21,12 +22,18 @@ struct Header: View {
 
 
 struct HeroSection: View {
+    
+    let heroText = "Choose a dessert below to see ingredients, recipe instructions, and more!"
+    @Environment(\.colorScheme) var colorScheme
+    
+    
     var body: some View {
         ZStack {
-            Color(.primary1)
+            Color(colorScheme == .light ? .secondary1 : .secondary2)
                 .frame(maxWidth: .infinity, maxHeight: 250)
             HStack{
-                Text("Choose a dessert below to see ingredients, recipe instructions, and more!")
+                Text(heroText)
+                    .foregroundColor(colorScheme == .light ? .secondary2 : .secondary1)
                     .font(.title2)
                     .padding([.horizontal], 5)
                 Image(.recipebook)
@@ -57,6 +64,7 @@ struct MealItemView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(maxWidth: 150, alignment: .trailing)
+                        .cornerRadius(3.0)
                     
                 } else if phase.error != nil {
                     Label("Could not load image", systemImage: "photo")
@@ -112,30 +120,6 @@ struct ContentView: View {
         .onAppear{
             dataMgr.BruteForce()
         }
-       
-        
-//        NavigationView {
-//            
-//            VStack {
-//                
-//                // Header
-//                Header()
-//                
-//                // Hero Section
-//                HeroSection()
-//                
-//                // Meal Items
-//                //MealListView(dataMgr: dataMgr)
-//                
-//                
-//                
-//            }
-//            .padding()
-//            .onAppear{
-//                dataMgr.BruteForce()
-//            }
-//        } // end Navigation View
-//        .edgesIgnoringSafeArea(.all)
     }
     
     
