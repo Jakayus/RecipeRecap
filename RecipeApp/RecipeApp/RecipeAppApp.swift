@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct RecipeAppApp: App {
     
-    @StateObject var dataMgr = DataManager()
+    @StateObject var dataMgr = RecipeViewModel()
     
     var body: some Scene {
         WindowGroup {
