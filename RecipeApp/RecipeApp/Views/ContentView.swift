@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var dataMgr: RecipeViewModel
+    var emptyMeals = MealList(meals: [Meal]())
     
     var body: some View {
         
@@ -20,9 +21,11 @@ struct ContentView: View {
                 RecipeList(dataMgr: dataMgr)
             }
         }
-        .onAppear{
-            dataMgr.getMealListByCategory()
+        .task {
+            dataMgr.allMeals = (try? await dataMgr.grabList()) ?? emptyMeals
         }
+        
+        
     }
 }
 

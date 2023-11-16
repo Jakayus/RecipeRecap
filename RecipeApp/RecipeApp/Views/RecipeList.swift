@@ -7,6 +7,28 @@
 
 import SwiftUI
 
+struct RecipeDetails: View {
+    
+    @ObservedObject var dataMgr: RecipeViewModel
+    let meal: Meal
+    var emptyMeals = MealList(meals: [Meal]())
+    
+    var body: some View {
+        VStack {
+            Text("Details")
+            Text("Name: \(dataMgr.detailedMealList.meals.first?.strMeal ?? "unknown meal")")
+        }
+//        .onAppear{
+//            //dataMgr.getMealDetails(for: meal.idMeal)
+//        }
+        .task {
+            dataMgr.detailedMealList = (try? await dataMgr.grabFoodDetails(for: meal.idMeal)) ?? emptyMeals
+        }
+        
+    }
+}
+
+
 struct RecipeList: View {
     
     @ObservedObject var dataMgr: RecipeViewModel
@@ -15,7 +37,8 @@ struct RecipeList: View {
         List {
             ForEach(dataMgr.allMeals.meals) { meal in
                 NavigationLink  {
-                    Text("\(meal.strMeal ?? "unknown meal") Details View")
+                    RecipeDetails(dataMgr: dataMgr, meal: meal)
+                    //RecipeDetails(dataMgr: dataMgr, meal: meal)
                 } label: {
                     SingleMealRow(meal: meal)
                 }
