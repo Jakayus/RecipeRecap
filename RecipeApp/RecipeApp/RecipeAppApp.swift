@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct RecipeAppApp: App {
+    
+    @StateObject var dataMgr = NetworkingManager()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(dataMgr: dataMgr)
         }
     }
 }

@@ -10,9 +10,19 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @ObservedObject var dataMgr: NetworkingManager
+    
     @State var mainURL = ""
     
     let sampleList = ["meal1", "meal2", "meal3"]
+    
+    var mealList2 = [Meal]()
+    
+    
+    var debugJSON = ""
+    
+    
+    
     
     var body: some View {
         NavigationView {
@@ -33,14 +43,15 @@ struct ContentView: View {
                 
                 // Meal Items
                 List {
-                    // TODO: Apply a ForEach here for the meal list
+                    // TODO: Apply a ForEach here for the meal list after grabbing from network
                     
-                    ForEach(sampleList, id: \.self) { meal in
+                    ForEach(dataMgr.allMeals.meals) { meal in
                         NavigationLink  {
-                            Text("\(meal) Details View")
-                        } label: {
-                            Text("\(meal) Item View")
+                            Text("\(meal.strMeal ?? "unknown meal") Details View")
                         }
+                    label: {
+                        Text("\(meal.strMeal ?? "unknown" )Item View")
+                    }
                     }
                     
                 }
@@ -50,55 +61,21 @@ struct ContentView: View {
             }
             .padding()
             .onAppear{
-               // getMealData() DEBUG purposes only
+                dataMgr.BruteForce()
+                
             }
         } // end Navigation View
     }
     
     
-    func decodeMealByIDData(data: Data) {
-        let decoder = JSONDecoder()
-        
-        do {
-            let mealList = try decoder.decode(MealList.self, from: data)
-            
-            for meal in mealList.meals {
-                print("\(meal.strMeal ?? "unknown meal")")
-            }
-            
-        } catch {
-            print("Error decoding meal by ID")
-        }
-        
-        
-    }
     
-    func getMealData() {
-        
-        mainURL = "https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert"
-        
-        guard let url = URL(string: mainURL) else {
-            print("Invalid URL")
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            if let data = data {
-                self.decodeMealByIDData(data: data)
-            } else {
-                print("Error fetching data")
-            }
-        }
-        task.resume()
-        
-    }
     
     
     
 }
 
 #Preview {
-    ContentView()
+    ContentView(dataMgr: NetworkingManager())
 }
 
 

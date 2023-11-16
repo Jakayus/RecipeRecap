@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct Meal: Decodable {
+struct Meal: Decodable, Identifiable {
+    var id: String {
+        self.idMeal
+    }
+    
     
     // MustHaves
     let idMeal: String
