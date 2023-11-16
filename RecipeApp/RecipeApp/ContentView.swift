@@ -10,10 +10,12 @@ import SwiftUI
 
 struct Header: View {
     var body: some View {
+        
         Text("Recipe Recap")
             .italic()
             .bold()
             .font(.largeTitle)
+            .padding()
     }
 }
 
@@ -22,11 +24,14 @@ struct HeroSection: View {
     var body: some View {
         ZStack {
             Color(.primary1)
+                .frame(maxWidth: .infinity, maxHeight: 250)
             HStack{
                 Text("Choose a dessert below to see ingredients, recipe instructions, and more!")
+                    .font(.title2)
+                    .padding([.horizontal], 5)
                 Image(.recipebook)
                     .resizable()
-                    .scaledToFit()
+                    .frame(width: 180, height: 100)
                     .cornerRadius(5)
             }
         }
@@ -40,8 +45,10 @@ struct MealItemView: View {
     
     var body: some View {
         HStack{
-            Text("\(meal.strMeal ?? "unknown" )Item View")
+            Text("\(meal.strMeal ?? "unknown" )")
                 .foregroundColor(.primary)
+            
+            Spacer()
             
             // using Apple example of error handling for AsyncImage
             AsyncImage(url: URL(string: meal.strMealThumb ?? "no image")) { phase in
@@ -92,27 +99,43 @@ struct ContentView: View {
     @ObservedObject var dataMgr: DataManager
     
     var body: some View {
-        NavigationView {
-            
-            VStack {
-                
-                // Header
+        
+        
+        NavigationView{
+            VStack(spacing: 0) {
                 Header()
-                
-                // Hero Section
                 HeroSection()
-                
-                // Meal Items
                 MealListView(dataMgr: dataMgr)
                 
-                
-                
             }
-            .padding()
-            .onAppear{
-                dataMgr.BruteForce()
-            }
-        } // end Navigation View
+        }
+        .onAppear{
+            dataMgr.BruteForce()
+        }
+       
+        
+//        NavigationView {
+//            
+//            VStack {
+//                
+//                // Header
+//                Header()
+//                
+//                // Hero Section
+//                HeroSection()
+//                
+//                // Meal Items
+//                //MealListView(dataMgr: dataMgr)
+//                
+//                
+//                
+//            }
+//            .padding()
+//            .onAppear{
+//                dataMgr.BruteForce()
+//            }
+//        } // end Navigation View
+//        .edgesIgnoringSafeArea(.all)
     }
     
     
