@@ -13,10 +13,24 @@ struct RecipeDetails: View {
     let meal: Meal
     var emptyMeals = MealList(meals: [Meal]())
     
+    let sampleText:String? = nil
+    
+    
+    
+    // meal name
+    // instructions
+    // ingredients/measurements
+    
     var body: some View {
         VStack {
-            Text("Details")
-            Text("Name: \(dataMgr.detailedMealList.meals.first?.strMeal ?? "unknown meal")")
+            
+//            ForEach(dataMgr.stringList, id: \.self)  {
+//                Text("\($0)")
+//            }
+            Text("\(dataMgr.stringTest)")
+                .multilineTextAlignment(.center)
+            
+            
         }
         .task {
             dataMgr.detailedMealList = (try? await dataMgr.grabFoodDetails(for: meal.idMeal)) ?? emptyMeals
