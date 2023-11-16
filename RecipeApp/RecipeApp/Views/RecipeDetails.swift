@@ -7,19 +7,19 @@
 
 import SwiftUI
 
+/// - Description: This provides a detailed description of each selected meal. It includes the Ttitle, an image, instructions, and measurements.
 struct RecipeDetails: View {
     
     @ObservedObject var dataMgr: RecipeViewModel
     let meal: Meal
     var emptyMeals = MealList(meals: [Meal]())
-    
-    let sampleText:String? = nil
 
     var body: some View {
         ScrollView {
             Text("\((dataMgr.detailedMealList.meals.first?.strMeal ?? "No Dish Name provided"))")
                 .bold()
                 .font(.title)
+            
             // using Apple example of error handling for AsyncImage
             AsyncImage(url: URL(string: meal.strMealThumb ?? "no image")) { phase in
                 if let image = phase.image {
@@ -56,7 +56,7 @@ struct RecipeDetails: View {
 
         }
         .task {
-            dataMgr.detailedMealList = (try? await dataMgr.grabFoodDetails(for: meal.idMeal)) ?? emptyMeals
+            dataMgr.detailedMealList = (try? await dataMgr.grabFoodDetails(for: meal.idMeal)) ?? emptyMeals // using async await for processing
         }
     }
 }

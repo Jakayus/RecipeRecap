@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// - Description: This represents the header bar at the top of the screen
 struct Header: View {
     
     var body: some View {

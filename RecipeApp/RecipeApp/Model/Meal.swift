@@ -7,7 +7,11 @@
 
 import Foundation
 
+/// This reflects the structures found at the Meal Database API.
+
 struct Meal: Decodable, Identifiable {
+    
+    /// Adopted Identifiable protocol for ease of use in for loops. Required ID is set to match the MealID.
     var id: String {
         self.idMeal
     }
@@ -59,8 +63,7 @@ struct Meal: Decodable, Identifiable {
     var strMeasure20: String?
     
     // NiceToHaves
-    var strDrinkAlternate: String?
-    var strArea: String?
+    var strArea: String? // unused
     var strMealThumb: String?
     
 }

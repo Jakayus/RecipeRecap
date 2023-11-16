@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// - Description: Starting Screen for the App
 struct ContentView: View {
     
     @ObservedObject var dataMgr: RecipeViewModel
@@ -22,7 +23,7 @@ struct ContentView: View {
             }
         }
         .task {
-            dataMgr.allMeals = (try? await dataMgr.grabList()) ?? emptyMeals
+            dataMgr.allMeals = (try? await dataMgr.grabList()) ?? emptyMeals // declare meals as empty if needed
         }
     }
 }
@@ -32,5 +33,4 @@ struct ContentView: View {
 }
 
 
-// note - color hunt link: https://colorhunt.co/palette/a7d397f5eec8d0d4ca555843
 

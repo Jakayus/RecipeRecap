@@ -7,17 +7,19 @@
 
 import SwiftUI
 
+/// - Description: This represents a single row in the Meal List on the home page.
 struct SingleMealRow: View {
     
     let meal: Meal
     
     var body: some View {
         HStack{
+            
             Text("\(meal.strMeal ?? "unknown" )")
                 .foregroundColor(.primary)
             
             Spacer()
-            
+        
             // using Apple example of error handling for AsyncImage
             AsyncImage(url: URL(string: meal.strMealThumb ?? "no image")) { phase in
                 if let image = phase.image {

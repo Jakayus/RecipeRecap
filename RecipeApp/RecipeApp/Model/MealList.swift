@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// This reflects the structure found at the Meal DB API
+
 struct MealList: Decodable {
     
     var meals: [Meal]

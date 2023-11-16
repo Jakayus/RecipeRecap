@@ -8,35 +8,44 @@
 import Foundation
 import SwiftUI
 
-@MainActor // class needs to act on the main thread
+@MainActor /// class needs to act on the main thread
+
+/// This class acts as the ViewModel for the Recipe App.
 class RecipeViewModel: ObservableObject {
     
+    /// MealList type arrays used to capture the decoded JSON data
     @Published var allMeals = MealList(meals: [Meal]())
     @Published var detailedMealList = MealList(meals: [Meal]())
 
+    /// Captured lists for quick display in the RecipeDetails View
     @Published var ingredientsList = ""
     @Published var measurementList = ""
     @Published var instructions: String = ""
         
     var stringList: [String] = []
     
+    /// This function grabs a list of Meals from the Meal DB API based upon the "Dessert" category
+    /// - Parameter Void
+    /// - Returns MealList: The array representing all the meals in the Dessert category
     func grabList() async throws -> MealList {
         let mealURL = URL(string: "https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert")!
         let (data, _) = try await URLSession.shared.data(from: mealURL)
         return try JSONDecoder().decode(MealList.self, from: data)
     }
     
-    
+    /// This function grabs a meal based upon its ID. The API displays a list of one meal in an array.
+    ///   - Parameter ID: The String ID associated with an individual Meal
+    ///   - Returns MealList: The array of size 1 representing a single meal based upon Meal ID
     func grabFoodDetails(for ID: String) async throws -> MealList {
         
-        // decode Meal List
+        /// Decode JSON data representing a single meal in an array
         let singleMealURL = URL(string: "https://www.themealdb.com/api/json/v1/1/lookup.php?i=\(ID)")!
         let (data, _) = try await URLSession.shared.data(from: singleMealURL)
         
         let MealList = try JSONDecoder().decode(MealList.self, from: data)
         
         
-        // capture instructins
+        /// Use the decoded data and set the instruciton string accordingly for display
         if let decodedInstructions = MealList.meals.first?.strInstructions {
             instructions = decodedInstructions
         } else {
@@ -44,7 +53,7 @@ class RecipeViewModel: ObservableObject {
         }
         
 
-        // capture ingredients
+        /// Use the decoded data and filter out nil or empty ingredients for display
         var ingredientsArray = [String]()
         var ingredientsWithNil: [String?] = []
         ingredientsWithNil.append(MealList.meals.first?.strIngredient1)
@@ -68,12 +77,11 @@ class RecipeViewModel: ObservableObject {
         ingredientsWithNil.append(MealList.meals.first?.strIngredient19)
         ingredientsWithNil.append(MealList.meals.first?.strIngredient20)
         
-        // filter out nil or empty ingredients
         ingredientsArray = ingredientsWithNil.compactMap { $0 }
         ingredientsArray = ingredientsArray.filter { !$0.isEmpty }
         ingredientsList = ingredientsArray.joined(separator: ",")
 
-        // capture measurements
+        /// Use the decoded data and filter out nil or empty measurements for display
         var measurementsArray = [String]()
         var measurementsWithNil: [String?] = []
         
@@ -98,11 +106,11 @@ class RecipeViewModel: ObservableObject {
         measurementsWithNil.append(MealList.meals.first?.strMeasure19)
         measurementsWithNil.append(MealList.meals.first?.strMeasure20)
         
-        // filter out nil or empty ingredients
         measurementsArray = measurementsWithNil.compactMap { $0 }
         measurementsArray = measurementsArray.filter { !$0.isEmpty }
         measurementList = measurementsArray.joined(separator: ",")
         
+       
         return MealList
        
     }
