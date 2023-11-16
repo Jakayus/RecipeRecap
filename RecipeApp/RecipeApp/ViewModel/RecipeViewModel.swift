@@ -17,18 +17,9 @@ class RecipeViewModel: ObservableObject {
     @Published var ingredientsList = ""
     @Published var measurementList = ""
     @Published var instructions: String = ""
-    
-    
-    
-    
-    enum ExampleError: Error {
-        case ErrorType1
-    }
-    
+        
     var stringList: [String] = []
     
- // call first function
-// async call for meal list
     func grabList() async throws -> MealList {
         let mealURL = URL(string: "https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert")!
         let (data, _) = try await URLSession.shared.data(from: mealURL)
@@ -112,44 +103,8 @@ class RecipeViewModel: ObservableObject {
         measurementsArray = measurementsArray.filter { !$0.isEmpty }
         measurementList = measurementsArray.joined(separator: ",")
         
-        
-        
         return MealList
-        
        
     }
     
 }
-
-//        // Take advantage of Mirror-ing and use it to iterate through struct properties.
-//        // compare type against strings and remove nils
-//        // compare values against empty strings
-//        // new array should be returned
-////
-//        let mirror = Mirror(reflecting: MealList.meals)
-//
-//        var stringValues: [String?] = []
-//
-//        var stringArray: [String] = []
-//        var singleString = ""
-//
-//        for child in mirror.children {
-//            //print("value: \(child.value)\n\n")
-//            //print("label: \(child.label)\n\n")
-//            //singleString = child.value ?? "nil"
-//
-//            if let stringValue = child.value as? String? {
-//                stringValues.append(stringValue)
-//            }
-//
-//
-//        }
-//        print("stringValues: \(stringValues)")
-//
-//
-//        //let stringList2: [String] = stringList.compactMap { $0 } // remove nils
-//
-//
-//       // stringList = singleString.components(separatedBy: ",")
-//
-//       // print("stringList: \(stringList)\n\n")

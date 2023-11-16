@@ -12,7 +12,6 @@ struct Meal: Decodable, Identifiable {
         self.idMeal
     }
     
-    
     // MustHaves
     let idMeal: String
     var strMeal: String?

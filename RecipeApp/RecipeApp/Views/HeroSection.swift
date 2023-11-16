@@ -10,7 +10,7 @@ import SwiftUI
 struct HeroSection: View {
 
     @Environment(\.colorScheme) var colorScheme
-    let heroText = "Choose a dessert below to see ingredients, recipe instructions, and more!"
+    let heroText = "Choose a dessert below to see instructions on how to make it. Learn to create a new dessert today!"
 
     var body: some View {
         ZStack {

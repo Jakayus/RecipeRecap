@@ -24,8 +24,6 @@ struct ContentView: View {
         .task {
             dataMgr.allMeals = (try? await dataMgr.grabList()) ?? emptyMeals
         }
-        
-        
     }
 }
 
