@@ -22,14 +22,28 @@ struct RecipeDetails: View {
     // ingredients/measurements
     
     var body: some View {
-        VStack {
+        ScrollView {
+            Text("\((dataMgr.detailedMealList.meals.first?.strMeal ?? "No Dish Name provided"))")
+                .bold()
+                .font(.title)
             
-//            ForEach(dataMgr.stringList, id: \.self)  {
-//                Text("\($0)")
-//            }
-            Text("\(dataMgr.stringTest)")
-                .multilineTextAlignment(.center)
+            Group {
+                Text("Instructions")
+                    .bold()
+                Text(dataMgr.instructions)
+                    .font(.body)
+                Text("Ingredients")
+                    .bold()
+                Text(dataMgr.ingredientsList)
+                    .font(.body)
+                Text("Measurements")
+                    .bold()
+                Text(dataMgr.measurementList)
+                    .font(.body)
+            }
+            .padding([.horizontal])
             
+        
             
         }
         .task {

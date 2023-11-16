@@ -14,11 +14,11 @@ class RecipeViewModel: ObservableObject {
     @Published var allMeals = MealList(meals: [Meal]())
     @Published var detailedMealList = MealList(meals: [Meal]())
 
-    @Published var ingredientsArray = [String]()
-    @Published var measurementsArray = [String]()
-    @Published var Instructions: String? = nil
+    @Published var ingredientsList = ""
+    @Published var measurementList = ""
+    @Published var instructions: String = ""
     
-    @Published var stringTest = ""
+    
     
     
     enum ExampleError: Error {
@@ -37,18 +37,25 @@ class RecipeViewModel: ObservableObject {
     
     
     func grabFoodDetails(for ID: String) async throws -> MealList {
+        
+        // decode Meal List
         let singleMealURL = URL(string: "https://www.themealdb.com/api/json/v1/1/lookup.php?i=\(ID)")!
         let (data, _) = try await URLSession.shared.data(from: singleMealURL)
         
         let MealList = try JSONDecoder().decode(MealList.self, from: data)
         
-        var ingredientsWithNil: [String?] = []
-        var measurementsWithNil: [String?] = []
         
+        // capture instructins
+        if let decodedInstructions = MealList.meals.first?.strInstructions {
+            instructions = decodedInstructions
+        } else {
+            instructions = "No Instructions Provided"
+        }
         
-        
-        
+
         // capture ingredients
+        var ingredientsArray = [String]()
+        var ingredientsWithNil: [String?] = []
         ingredientsWithNil.append(MealList.meals.first?.strIngredient1)
         ingredientsWithNil.append(MealList.meals.first?.strIngredient2)
         ingredientsWithNil.append(MealList.meals.first?.strIngredient3)
@@ -70,13 +77,41 @@ class RecipeViewModel: ObservableObject {
         ingredientsWithNil.append(MealList.meals.first?.strIngredient19)
         ingredientsWithNil.append(MealList.meals.first?.strIngredient20)
         
-        // filter out ingredients
+        // filter out nil or empty ingredients
         ingredientsArray = ingredientsWithNil.compactMap { $0 }
-        stringTest = ingredientsArray.joined(separator: ",")
-        
-        
-        
+        ingredientsArray = ingredientsArray.filter { !$0.isEmpty }
+        ingredientsList = ingredientsArray.joined(separator: ",")
+
         // capture measurements
+        var measurementsArray = [String]()
+        var measurementsWithNil: [String?] = []
+        
+        measurementsWithNil.append(MealList.meals.first?.strMeasure1)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure2)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure3)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure4)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure5)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure6)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure7)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure8)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure9)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure10)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure11)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure12)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure13)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure14)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure15)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure16)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure17)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure18)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure19)
+        measurementsWithNil.append(MealList.meals.first?.strMeasure20)
+        
+        // filter out nil or empty ingredients
+        measurementsArray = measurementsWithNil.compactMap { $0 }
+        measurementsArray = measurementsArray.filter { !$0.isEmpty }
+        measurementList = measurementsArray.joined(separator: ",")
+        
         
         
         return MealList
