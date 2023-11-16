@@ -7,26 +7,7 @@
 
 import SwiftUI
 
-struct RecipeDetails: View {
-    
-    @ObservedObject var dataMgr: RecipeViewModel
-    let meal: Meal
-    var emptyMeals = MealList(meals: [Meal]())
-    
-    var body: some View {
-        VStack {
-            Text("Details")
-            Text("Name: \(dataMgr.detailedMealList.meals.first?.strMeal ?? "unknown meal")")
-        }
-//        .onAppear{
-//            //dataMgr.getMealDetails(for: meal.idMeal)
-//        }
-        .task {
-            dataMgr.detailedMealList = (try? await dataMgr.grabFoodDetails(for: meal.idMeal)) ?? emptyMeals
-        }
-        
-    }
-}
+
 
 
 struct RecipeList: View {
